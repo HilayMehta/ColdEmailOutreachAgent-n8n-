@@ -1,18 +1,19 @@
-# ColdEmailOutreachAgent-n8n-
+# Job Search Email Outreach Agentic Workflow -n8n
 
-This project automates the process of sending personalized outreach emails to multiple contacts using **n8n**, **Google Sheets**, and the **Gmail API**.  
-It generates customized messages with an LLM, attaches a resume, and updates the Google Sheet to track which contacts have already been emailed.
+This project is an agentic workflow built with n8n to automate personalized cold emails for job search outreach.
+It reads founder or recruiter details from a Google Sheet, uses an AI model to customize a pre-defined email template for each contact, and sends the emails automatically through Gmail.
+After each email is sent, the workflow updates the Google Sheet to track who has been contacted, making the entire process efficient, personalized, and fully automated.
 
 ---
 
-## 🧩 Features
+## Features
 
-- Pulls contact data (name, title, company, LinkedIn, etc.) directly from Google Sheets.  
-- Uses an LLM (OpenAI API for now) to craft tailored outreach messages.  
-- Randomly selects a specified number of people each run to avoid spamming.  
-- Sends emails automatically via Gmail with your attached resume.  
-- Updates the Google Sheet to mark each contact as “Email Sent.”  
-- Fully customizable and easily extendable to other workflows or APIs.
+- Pulls contact details (name, title, company, LinkedIn profile, etc.) directly from **Google Sheets**.  
+- Based on user input, filters and selects a set number of contacts for each run.  
+- Uses an **LLM (OpenAI API)** to generate personalized email messages one by one.  
+- Sends emails automatically through **Gmail** with attached resume.  
+- Updates the **Google Sheet** to mark each contact as “Email Sent.”  
+- Fully automated, modular, and easy to extend for other outreach workflows or APIs.
 
 ---
 
@@ -33,7 +34,7 @@ The n8n workflow consists of the following nodes:
    Generates a short, professional outreach message for each selected contact using a predefined prompt.
 
 5. **Read/Write Files from Disk**  
-   Loads the resume (PDF) from your local directory for email attachment.
+   Loads the resume (PDF) from the local directory for email attachment.
 
 6. **Send a Message (Gmail)**  
    Sends the personalized email to each contact with the generated message and attached resume.
