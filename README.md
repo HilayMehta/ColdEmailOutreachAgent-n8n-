@@ -44,12 +44,15 @@ The n8n workflow consists of the following nodes:
 
 ---
 
-## Folder and File Structure
+##  Folder and File Structure
 
+```text
 project/
 ├── JobSearchColdEmailOutreachAgenticSystem.json   # Exported n8n workflow
 ├── README.md                                      # Project documentation
 └── .env.example                                   # Example environment variables
+
+```
 
 ## ⚙️ Setup Instructions
 
