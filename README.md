@@ -17,7 +17,7 @@ After each email is sent, the workflow updates the Google Sheet to track who has
 
 ---
 
-## 🏗️ Workflow Overview
+## Workflow Overview
 
 The n8n workflow consists of the following nodes:
 
@@ -44,5 +44,79 @@ The n8n workflow consists of the following nodes:
 
 ---
 
-## 🧠 Folder and File Structure
+## Folder and File Structure
 
+project/
+│
+├── JobSearchColdEmailOutreachAgenticSystem.json # Exported n8n workflow
+├── README.md # Documentation
+└── .env.example # Example of environment variables
+
+## ⚙️ Setup Instructions
+
+### 1. Prerequisites
+- **Docker** installed on your system  
+  Follow the n8n Community Edition setup guide: [Install using Docker](https://docs.n8n.io/hosting/installation/docker/)
+- **Google Sheets** and **Gmail API** access via Google Cloud Console  
+- **OpenAI API Key** for generating personalized messages  
+- Import the provided `workflow.json` file into your n8n instance  
+
+### 2. Clone the Repository
+```bash
+git clone https://github.com/<yourusername>/automated-outreach-n8n.git
+cd automated-outreach-n8n
+```
+
+### 3. Run n8n with Persistent Storage
+
+```bash
+docker run -it \
+  -v n8n_data:/home/node/.n8n \
+  -v /Users/<yourname>/Documents:/files \
+  -p 5678:5678 \
+  -e N8N_BRANDING_N8N_POWERED=false \
+  -e GENERIC_TIMEZONE="America/Los_Angeles" \
+  n8nio/n8n
+```
+
+### 4. Import the Workflow
+
+1. Open n8n in your browser: [http://localhost:5678](http://localhost:5678)  
+2. Navigate to **Workflows → Import from File**  
+3. Select the file **`n8n_workflow_export.json`** from this repository  
+4. Once imported, you’ll see the full workflow displayed inside n8n  
+
+---
+
+### 5. Connect Your Credentials
+
+Before running the workflow, connect the necessary credentials:  
+- **Google Sheets:** Select or connect your Google account to allow the workflow to read and update the sheet  
+- **Gmail:** Authorize access so n8n can send emails from your Gmail account  
+- **OpenAI:** Add your API key in the **“Message a model”** node to enable personalized message generation  
+
+---
+
+### 6. Update File Paths
+
+In the **“Read/Write Files from Disk”** node, make sure the resume file path matches your local setup.  
+By default, it looks like this:  
+
+```bash
+/files/ {Resune.pdf}
+```
+
+If your resume is stored in a different folder, update the path accordingly.  
+This file will be attached to every email sent by the workflow.  
+
+A sample `data.csv` file is already included in the repository.  
+You can use it to test and understand how contact data moves from the sheet to the email automation. 
+
+
+## Future Improvements
+
+- Integrate open-source LLMs such as **Ollama**, **Mistral**, or **Phi-3** for local generation  
+- Add web search context for deeper personalization  
+- Build a dashboard for analytics and engagement tracking  
+- Schedule automatic runs (daily or weekly)  
+- Add fallback handling for failed sends  
